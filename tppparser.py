@@ -111,8 +111,7 @@ def p_declaracao_variaveis(p):
 def p_inicializacao_variaveis(p):
     """inicializacao_variaveis : atribuicao"""
 
-    pai = MyNode(name='inicializacao_variaveis',
-                 type='INICIALIZACAO_VARIAVEIS')
+    pai = MyNode(name='inicializacao_variaveis', type='INICIALIZACAO_VARIAVEIS')
     p[0] = pai
     p[1].parent = pai
 
@@ -713,7 +712,6 @@ def p_fator(p):
 def p_fator_error(p):
     """fator : ABRE_PARENTESE error FECHA_PARENTESE
         """
-ERR-SYN-FATOR
 
 def p_numero(p):
     """numero : NUM_INTEIRO
@@ -784,10 +782,8 @@ def p_lista_argumentos(p):
 
 def p_lista_argumentos_error(p):
     """lista_argumentos : error VIRGULA expressao
-                    | expressao
-                    | vazio
         """
-    # error_handler.newError('ERR-SYN-LISTA-ARGUMENTOS')
+    error_handler.newError('ERR-SYN-LISTA-ARGUMENTOS')
 
 
 def p_vazio(p):
