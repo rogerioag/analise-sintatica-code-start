@@ -1,3 +1,3 @@
 inteiro principal()
-    leia(5)
+    retorna(0)
 fim

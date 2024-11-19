@@ -16,4 +16,3 @@ inteiro principal()
     b := +b + i
     
     retorna(0)
-fim
