@@ -841,7 +841,9 @@ def main():
     
     # print ("No. of arguments passed is ", len(sys.argv))
 
-    if(len(sys.argv) < 2):
+    if(not check_key and len(sys.argv) < 2):
+        raise TypeError(error_handler.newError(check_key, 'ERR-SYN-USE'))
+    elif (check_key and len(sys.argv) < 3):
         raise TypeError(error_handler.newError(check_key, 'ERR-SYN-USE'))
 
     if not check_tpp:

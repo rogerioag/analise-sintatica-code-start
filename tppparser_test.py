@@ -4,7 +4,7 @@ import subprocess
 import shlex
 import os, fnmatch
 
-test_cases = [("", "-k"), ("teste.c", "-k")]
+test_cases = [("", "-k"), ("teste.c", "-k"), ("notexist.tpp", "-k")]
 
 for file in fnmatch.filter(os.listdir('tests/'), '*.tpp'):
     test_cases.append((file, "-k"))
@@ -41,6 +41,6 @@ def test_execute(input_file, args):
     print("Expected output:")
     print(expected_output)
 
-    assert stdout.decode("utf-8") == expected_output
+    assert stdout.decode("utf-8").strip() == expected_output.strip()
 
 
