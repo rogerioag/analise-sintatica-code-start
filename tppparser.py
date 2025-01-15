@@ -30,6 +30,7 @@ error_handler = MyError('ParserErrors')
 
 check_tpp = False
 check_key = False
+check_gentree = False
 
 root = None
 
@@ -825,9 +826,11 @@ def main():
 
     global check_tpp
     global check_key
+    global check_gentree
 
     check_ttp = False
     check_key = False
+    check_gentree = False
     
     for idx, arg in enumerate(sys.argv):
         # print("Argument #{} is {}".format(idx, arg))
@@ -836,8 +839,13 @@ def main():
             check_tpp = True
             idx_tpp = idx
 
+        # Print only error keys and tokens.
         if(arg == "-k"):
             check_key = True
+
+        ## Generate Tree?
+        if(arg == "-t"):
+            check_gentree = True
     
     # print ("No. of arguments passed is ", len(sys.argv))
 
@@ -855,7 +863,7 @@ def main():
         source_file = data.read()
         parser.parse(source_file)
 
-    if root and root.children != ():
+    if root and root.children != () and check_gentree:
         print(error_handler.newError(check_key, 'WAR-SYN-GEN-SYNTAX-TREE'))
         # DotExporter(root).to_picture(argv[1] + ".ast.png")
         UniqueDotExporter(root).to_picture(argv[1] + ".unique.ast.png")
@@ -865,7 +873,7 @@ def main():
         with open(argv[1] + "ascii_tree.txt", "w") as f:
             f.write(RenderTree(root, style=AsciiStyle()).by_attr())
         # print("Output file: " + argv[1] + ".ast.png")
-        print(error_handler.newError(check_key, 'WAR-SYN-OUTPUT-FILE', argv[1] + ".ast.png"))
+        print(error_handler.newError(check_key, 'WAR-SYN-OUTPUT-FILE', file=argv[1] + ".ast.png", teste='bla'))
         print(error_handler.newError(check_key, 'WAR-SYN-ANA-SUCCESS'))
         
 
